@@ -3,8 +3,10 @@
 // you.
 if (Number(process.version.slice(1).split(".")[0]) < 16) throw new Error("Node 16.x or higher is required. Update Node on your system.");
 
+const DB_URL = process.env.DATABASE_URL || '';
+
 const {Client, Collection} = require("discord.js");
-const Database = require('./models/database');
+const Database = DB_URL.startsWith('file://') ? require('./models/database-sqlite') : require('./models/database');
 
 const {readdirSync} = require("fs");
 const {intents, partials} = require("./config");
@@ -20,7 +22,7 @@ const slashcmds = new Collection();
 client.container = {
     slashcmds,
     debug: process.env.NODE_ENV !== "production",
-    pg: new Database(process.env.DATABASE_URL)
+    pg: new Database(DB_URL) //pg is now a bit of a misnomer as it could be sqlite, but eh
 };
 
 const init = async () => {

@@ -12,7 +12,7 @@ You are allowed to host the bot and make changes, but you need to respect the li
 
 To host the bot, you can download all the files, run `npm install`, and add the following variables to the environment:
 ```
-DATABASE_URL = Link to the database (I use PostgreSQL database)
+DATABASE_URL = Link to the database (PostgreSQL connect string or file:// url for sqlite)
 DISCORD_CLIENT_ID = ID of your Discord application
 DISCORD_CLIENT_SECRET = Client secret of your Discord application
 DISCORD_REDIRECT_URI = Redirect URL : it is normally https://yoururl.com/connect
